@@ -1,75 +1,63 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import './App.css';
-import MarcsterpieceABI from './artifacts/contracts/Marcsterpiece.sol/Marcsterpiece.json'; // Import your contract ABI
+import MarcsterpieceABI from './artifacts/contracts/Marcsterpiece.sol/Marcsterpiece.json';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [currentAccount, setCurrentAccount] = useState('');
+  const [currentAccount, setCurrentAccount] = useState(null);
   const [contract, setContract] = useState(null);
 
-  // Initialize ethers and connect to MetaMask
-  useEffect(() => {
-    const init = async () => {
-      if (window.ethereum) {
-        try {
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const accounts = await provider.send("eth_requestAccounts", []);
-          setCurrentAccount(accounts[0]);
-          
-          const signer = provider.getSigner();
-          const marcsterpieceContract = new ethers.Contract(
-            'Your_Contract_Address',
-            MarcsterpieceABI,
-            signer
-          );
-          setContract(marcsterpieceContract);
-        } catch (error) {
-          console.error("Error connecting to MetaMask", error);
-        }
-      } else {
-        console.log("MetaMask is not installed");
+  // Update with your contract address
+  const contractAddress = '0x5fbdb2315678afecb367f032d93f642f64180aa3'; 
+
+  // MetaMask Connect Function
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setCurrentAccount(accounts[0]);
+      } catch (error) {
+        console.error("Error connecting to MetaMask", error);
       }
-    };
+    } else {
+      alert("MetaMask is not installed. Please install it to use this app.");
+    }
+  };
 
-    init();
-  }, []);
+  // Initialize Contract
+  useEffect(() => {
+    if (!currentAccount) return;
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const marcsterpieceContract = new ethers.Contract(contractAddress, MarcsterpieceABI.abi, signer);
+    setContract(marcsterpieceContract);
+  }, [currentAccount]);
 
-  // Example interaction with the contract
-  const interactWithContract = async () => {
+  // Mint NFT
+  const mintNFT = async (tokenURI) => {
     if (!contract) return;
     try {
-      // Example: calling a contract read method
-      const data = await contract.yourContractMethodNameHere();
-      console.log(data);
+      const transaction = await contract.mintNFT(currentAccount, tokenURI, { value: ethers.utils.parseEther("0.01") });
+      await transaction.wait();
+      alert("NFT Minted Successfully!");
     } catch (error) {
-      console.error("Error interacting with the contract", error);
+      console.error("Error minting NFT", error);
     }
   };
 
   return (
-    <>
-      <div>
-        <h1>Vite + React + Ethers</h1>
-        {currentAccount && <p>Connected account: {currentAccount}</p>}
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <button onClick={interactWithContract}>
-            Interact with Contract
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="App">
+      <header className="App-header">
+        {currentAccount ? (
+          <div>
+            <p>Wallet Connected: {currentAccount}</p>
+            <button onClick={() => mintNFT("https://example.com/nft")}>Mint NFT</button>
+          </div>
+        ) : (
+          <button onClick={connectWallet}>Connect MetaMask Wallet</button>
+        )}
+      </header>
+    </div>
   );
 }
 
 export default App;
-
