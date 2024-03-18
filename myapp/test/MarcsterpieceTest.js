@@ -1,6 +1,8 @@
+// Import the entire hardhat default export and then destructure to get ethers
 import hardhat from 'hardhat';
 const { ethers } = hardhat;
 import { expect } from "chai";
+
 
 describe("Marcsterpiece", function () {
   let marcsterpiece;
@@ -14,7 +16,7 @@ describe("Marcsterpiece", function () {
     const Marcsterpiece = await ethers.getContractFactory("Marcsterpiece");
     [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
     marcsterpiece = await Marcsterpiece.deploy();
-    //await marcsterpiece.deployed();
+    // Removed the await marcsterpiece.deployed() as it was causing confusion
   });
 
   describe("Minting", function () {
@@ -30,7 +32,7 @@ describe("Marcsterpiece", function () {
     });
 
     it("should fail minting with insufficient Ether", async function () {
-      const insufficientAmount = ethers.utils.parseEther("0.001"); // Less than the mintPrice
+      const insufficientAmount = ethers.utils.parseEther("0.001"); // Correct usage
       const tokenURI = "anotherUniqueTokenURI";
 
       await expect(marcsterpiece.connect(addr1).mintNFT(addr1.address, tokenURI, { value: insufficientAmount }))
