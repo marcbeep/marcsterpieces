@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "hardhat-gas-reporter": "^2.0.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "web3": "^1.7.0" 
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
@@ -25,9 +25,8 @@
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "ethereum-waffle": "^4.0.10",
-    "ethers": "^6.11.1",
     "hardhat": "^2.22.1",
     "vite": "^5.1.6"
   }
 }
+
