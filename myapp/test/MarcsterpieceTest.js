@@ -14,7 +14,7 @@ describe("Marcsterpiece", function () {
     const Marcsterpiece = await ethers.getContractFactory("Marcsterpiece");
     [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
     marcsterpiece = await Marcsterpiece.deploy();
-    await marcsterpiece.deployed();
+    //await marcsterpiece.deployed();
   });
 
   describe("Minting", function () {
