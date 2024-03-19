@@ -75,7 +75,7 @@ function App() {
           <>
             <p className="mb-4">Connected Account: {currentAccount}</p>
             <Balance web3={web3} account={currentAccount} />
-            <NFTGrid totalMinted={100} contentId={contentId} web3={web3} contract={contract} account={currentAccount} mintNFT={mintNFT} />
+            <NFTGrid totalMinted={totalMinted + 1} contentId={contentId} web3={web3} contract={contract} account={currentAccount} mintNFT={mintNFT} />
           </>
         ) : (
           <button className="btn btn-primary" onClick={() => window.location.reload()}>Connect to MetaMask</button>
