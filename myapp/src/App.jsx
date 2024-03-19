@@ -28,7 +28,7 @@ function App() {
           setErrorMessage(`Initialization failed: ${error.message}`);
         }
       } else {
-        setErrorMessage("MetaMask is not installed.");
+        setErrorMessage("MetaMask is not installed. Please consider installing to your browser: https://metamask.io/");
       }
     };
     loadWeb3();
