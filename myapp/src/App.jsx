@@ -4,7 +4,7 @@ import MarcsterpieceABI from './artifacts/contracts/Marcsterpiece.sol/Marcsterpi
 import Balance from './Balance';
 import NFTGrid from './NFTGrid'; // New component to manage grid layout
 
-const contractAddress = '0x5fbdb2315678afecb367f032d93f642f64180aa3';
+const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 const contentId = 'QmWDvftEJszohJCKKKLpbpYsFg6F7DX1xj4BXUqFR7uNni';
 
 function App() {
