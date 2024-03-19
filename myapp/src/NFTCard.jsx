@@ -1,5 +1,5 @@
 function NFTCard({ index, contentId, isMinted }) { // isMinted will determine what to display
-  const imageUri = `https://gateway.pinata.cloud/ipfs/${contentId}/${index}.png`;
+  const imageUri = `https://gateway.pinata.cloud/ipfs/${contentId}/${index}.svg`;
 
   return (
     <div className="card card-compact bg-base-100 shadow-xl">
