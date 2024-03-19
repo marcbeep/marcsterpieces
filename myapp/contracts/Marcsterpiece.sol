@@ -45,4 +45,8 @@ contract Marcsterpiece is
         uint256 balance = address(this).balance;
         payable(owner()).transfer(balance);
     }
+
+    function totalMinted() public view returns (uint256) {
+        return _tokenIds.current();
+    }
 }
