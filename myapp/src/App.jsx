@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
 import MarcsterpieceABI from './artifacts/contracts/Marcsterpiece.sol/Marcsterpiece.json';
 import Balance from './Balance';
-import NFTImage from './NFTImage'; 
+import NFTGrid from './NFTGrid'; // New component to manage grid layout
 
 const contractAddress = '0x5fbdb2315678afecb367f032d93f642f64180aa3';
 const contentId = 'QmWDvftEJszohJCKKKLpbpYsFg6F7DX1xj4BXUqFR7uNni';
@@ -13,6 +13,7 @@ function App() {
   const [contract, setContract] = useState(null);
   const [totalMinted, setTotalMinted] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
+  const [minting, setMinting] = useState(false); 
 
   useEffect(() => {
     const loadWeb3AndContract = async () => {
@@ -29,8 +30,7 @@ function App() {
           setCurrentAccount(accounts[0]);
 
           // Fetch total minted NFTs
-          const total = await tempContract.methods.totalMinted().call();
-          setTotalMinted(parseInt(total));
+          updateTotalMinted(tempContract);
         } catch (error) {
           setErrorMessage(`Initialization failed: ${error.message}`);
         }
@@ -42,6 +42,30 @@ function App() {
     loadWeb3AndContract();
   }, []);
 
+  // Extracted the update function to reuse after minting
+  const updateTotalMinted = async (tempContract) => {
+    const total = await tempContract.methods.totalMinted().call();
+    setTotalMinted(parseInt(total));
+  };
+
+  // Function to mint NFT
+  const mintNFT = async () => {
+    if (!contract || !currentAccount) {
+      setErrorMessage("Contract not loaded or wallet not connected.");
+      return;
+    }
+    try {
+      setMinting(true);
+      const tokenURI = `${contentId}/${totalMinted}.json`; // Assuming tokenURI follows this pattern
+      await contract.methods.mintNFT(currentAccount, tokenURI).send({ from: currentAccount, value: web3.utils.toWei("0.01", "ether") });
+      await updateTotalMinted(contract);
+      setMinting(false);
+    } catch (error) {
+      setErrorMessage(`Minting failed: ${error.message}`);
+      setMinting(false);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="text-center">
@@ -51,9 +75,7 @@ function App() {
           <>
             <p className="mb-4">Connected Account: {currentAccount}</p>
             <Balance web3={web3} account={currentAccount} />
-            {Array.from({ length: totalMinted }).map((_, i) => (
-              <NFTImage key={i} index={i} contentId={contentId} web3={web3} contract={contract} account={currentAccount} />
-            ))}
+            <NFTGrid totalMinted={100} contentId={contentId} web3={web3} contract={contract} account={currentAccount} mintNFT={mintNFT} />
           </>
         ) : (
           <button className="btn btn-primary" onClick={() => window.location.reload()}>Connect to MetaMask</button>
