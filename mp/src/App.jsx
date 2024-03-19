@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
 import MarcsterpieceABI from './artifacts/contracts/Marcsterpiece.sol/Marcsterpiece.json';
 import Balance from './Balance';
-import NFTGrid from './NFTGrid'; // New component to manage grid layout
+import NFTGrid from './NFTGrid'; 
 
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 const contentId = 'QmWDvftEJszohJCKKKLpbpYsFg6F7DX1xj4BXUqFR7uNni';
@@ -56,7 +56,7 @@ function App() {
     }
     try {
       setMinting(true);
-      const tokenURI = `${contentId}/${totalMinted}.json`; // Assuming tokenURI follows this pattern
+      const tokenURI = `${contentId}/${totalMinted}.json`; 
       await contract.methods.mintNFT(currentAccount, tokenURI).send({ from: currentAccount, value: web3.utils.toWei("0.01", "ether") });
       await updateTotalMinted(contract);
       setMinting(false);

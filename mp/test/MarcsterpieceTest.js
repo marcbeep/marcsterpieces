@@ -12,11 +12,9 @@ describe("Marcsterpiece", function () {
   let addrs;
 
   beforeEach(async function () {
-    // Deploy the Marcsterpiece contract before each test
     const Marcsterpiece = await ethers.getContractFactory("Marcsterpiece");
     [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
     marcsterpiece = await Marcsterpiece.deploy();
-    // Removed the await marcsterpiece.deployed() as it was causing confusion
   });
 
   describe("Minting", function () {

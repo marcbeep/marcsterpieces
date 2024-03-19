@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react';
 function NFTCard({ index, contentId, web3, contract, account, mintNFT }) {
   const [isMinted, setIsMinted] = useState(false);
   const imageUri = `https://gateway.pinata.cloud/ipfs/${contentId}/${index}.png`;
-  const placeholderUri = 'https://placehold.co/256x256/edede9/d5bdaf/?text=?'; // Ensure you have a placeholder image available
+  const placeholderUri = 'https://placehold.co/256x256/edede9/d5bdaf/?text=?'; 
 
   useEffect(() => {
     const checkMintedStatus = async () => {
-      const metadataURI = `${contentId}/${index}.json`; // Adjust if your metadata structure is different
-      // Ensure contract and metadataURI are correctly defined
+      const metadataURI = `${contentId}/${index}.json`; 
+
       try {
         const result = await contract.methods.isUriOwned(metadataURI).call();
-        console.log(`Is URI owned (NFT #${index}):`, result); // Logging the result
+        console.log(`Is URI owned (NFT #${index}):`, result); 
         setIsMinted(result);
       } catch (error) {
         console.error("Error checking minted status for NFT #" + index + ":", error);
@@ -23,10 +23,7 @@ function NFTCard({ index, contentId, web3, contract, account, mintNFT }) {
     }
   }, [contract, index, contentId]);
   
-
-  // Adjust mintToken function to use web3
   const mintToken = async () => {
-    // Use the existing mintNFT function but ensure it's adapted for web3 usage
     mintNFT(index);
   };
 

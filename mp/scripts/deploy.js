@@ -17,7 +17,6 @@ async function main() {
   // Deploy contract
   const marcsterpiece = await Marcsterpiece.deploy({
     data: contractArtifact.bytecode,
-    // constructor arguments here, if any
   })
   .send({
     from: deployer,

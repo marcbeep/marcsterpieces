@@ -1,5 +1,5 @@
 import React from 'react';
-import NFTCard from './NFTCard'; // Updated NFTImage component
+import NFTCard from './NFTCard'; 
 
 function NFTGrid({ totalMinted, contentId, web3, contract, account, mintNFT }) {
   return (
