@@ -1,8 +1,6 @@
-# Marcsterpiece (NFT Collection)
-
 ![Project Image](header.png)
 
-Marcsterpiece (marc-masterpiece) is a decentralized application (dApp) that allows users to mint unique digital art pieces as non-fungible tokens (NFTs). There are currently 100 images on the IPFS. Built with Solidity, React, and Web3.js, this project showcases the integration between a smart contract and a user-friendly frontend interface.
+Marcsterpieces (marc-masterpieces) is a decentralized application (dApp) that allows users to mint unique digital art pieces as non-fungible tokens (NFTs). There are currently 100 images on the IPFS. Built with Solidity, React, and Web3.js, this project showcases the integration between a smart contract and a user-friendly frontend interface.
 
 ## Features
 
@@ -27,8 +25,8 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/marcbeep/marcsterpiece.git
-cd myapp
+git clone https://github.com/marcbeep/marcsterpieces.git
+cd mp
 ```
 
 2. Install NPM packages for the smart contract:

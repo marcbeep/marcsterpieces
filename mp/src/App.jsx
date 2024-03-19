@@ -69,7 +69,7 @@ function App() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="text-center">
-        <h1 className="mb-6 text-4xl font-bold text-gray-900">React Ethereum DApp</h1>
+        <h1 className="mb-6 text-4xl font-bold text-gray-900">marcsterpieces dapp</h1>
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         {currentAccount ? (
           <>
