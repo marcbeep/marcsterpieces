@@ -1,6 +1,6 @@
 function NFTImage({ index, contentId }) {
-    const metadataUri = `${contentId}/${tokenId}.json`;
-    const imageUri = `https://gateway.pinata.cloud/ipfs/${contentId}/${tokenId}.png`;
+    const metadataUri = `https://gateway.pinata.cloud/ipfs/${contentId}/${index}.json`;
+    const imageUri = `https://gateway.pinata.cloud/ipfs/${contentId}/${index}.png`;
   
     return (
       <div className="card card-compact bg-base-100 shadow-xl">
@@ -13,6 +13,7 @@ function NFTImage({ index, contentId }) {
         </div>
       </div>
     );
-  }
-  export default NFTImage;
+}
+export default NFTImage;
+
   
