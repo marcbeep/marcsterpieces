@@ -50,6 +50,14 @@ npm run dev
 
 5. Connect your MetaMask wallet to the application and switch to the hardhat network (or any other network you've deployed your contract to).
 
+Ensure hardhat is running:
+
+```bash
+npx hardhat node
+```
+
+You can use any one of the private keys for testing.
+
 ## Usage
 
 After setting up the project and running the React application, navigate to the web interface to interact with the Marcsterpiece NFT collection.
